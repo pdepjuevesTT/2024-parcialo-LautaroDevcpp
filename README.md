@@ -1,6 +1,10 @@
 
 
-## Example
+## PARCIAL POO
 
-TODO
+alumno: Lautaro Agustin Marquez
+
+:)
+
+
 
