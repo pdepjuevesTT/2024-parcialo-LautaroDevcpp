@@ -307,6 +307,11 @@ class DebitoBancario inherits Metodo
 
     var debito 
 
+    // puede tener una verificación por titular, en ese caso agregaría un var titulares = [] de titulares y 
+    // verificaria que la persona esta contenida dentro del [] => en puede comprar se 
+    // agregaria un: && titulares.contains(persona)
+
+
     override method puedeComprar(persona,objeto)= debito > objeto.precio()
 
     override method cobrar(persona,precio)
@@ -324,7 +329,7 @@ class TarjetaDeCredito inherits Metodo
 
     var tarjeta 
 
-    method puedeComprar(objeto)= tarjeta.maxPermitido() > objeto.precio()*tarjeta.interes()
+    method puedeComprar(persona,objeto)= tarjeta.maxPermitido() > objeto.precio()*tarjeta.interes()
 
     override method cobrar(persona,precio)
     {
