@@ -214,7 +214,7 @@ class tarjeta
 
     var banco
 
-    var cantMeses
+    var cantMeses // cantMeses es el numero de cuotas en el que voy a pagar
 
     method cantMeses() = cantMeses
     method interes() = banco.interes()
@@ -376,6 +376,8 @@ class trabajo
 
     var sueldo 
     method sueldo()=sueldo
+
+    method aumentarSueldo(porcentaje){ sueldo *= 1.0*porcentaje}
 
 }
 
