@@ -56,11 +56,13 @@ class Persona
 
     method cantObjetos() = objetos.length()
 
-    method generarDeuda(pago)
+    method generarDeuda(pago,cantMeses)
     { 
         
         var mesesNum = [] // una lista de numeros con numeros desde el mes que se inicio la deuda hasta el mes que termina
-        
+        // ejemplo: una deuda de este mes hasta el mes seis seria = [0,1,2,3,4,5], sabiendo que este mes es el mes 0
+        // lo pensé así para poder manejar mejor los intervalos sabiendo que no siempre se va a arrancar desde el 0
+
         deudas.add(new Deuda( meses = mesesNum, pagoPorMes= pago)) 
         
     }
@@ -235,7 +237,7 @@ class Deuda
             // saco el primer elemento (no recuerdo si tiene efecto de lado)
             meses.drop(meses.length()-1)
 
-            if(meses==0)
+            if(meses.isEmpty())
             {
 
               saldada = true
@@ -328,7 +330,7 @@ class TarjetaDeCredito inherits Metodo
     {
 
         var pago = precio*tarjeta.interes()/tarjeta.cantMeses()
-        persona.generarDeuda(pago)
+        persona.generarDeuda(pago,tarjeta.cantMeses())
 
     }
 
