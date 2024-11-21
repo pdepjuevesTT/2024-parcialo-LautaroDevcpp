@@ -1,3 +1,5 @@
+// PERSONAS
+
 object poblacion
 {
 
@@ -14,107 +16,6 @@ object poblacion
 
     }
 
-
-}
-
-// BANCO
-
-object bancoCentral
-{
-
-    // debería tirar un random mejor, pero representa la tasa de interes asignada a cada entidad bancaria
-    var interes = 3
-
-    method interes () = interes
-
-}
-
-class Banco
-{
-
-    var interes
-    var maxPermitido
-
-    method maxPermitido() = maxPermitido
-    method interes() = bancoCentral.interes()
-    
-}
-
-//  TARJETAS
-
-class tarjeta
-{
-
-    var banco
-
-    var cantMeses
-
-    method cantMeses() = cantMeses
-    method interes() = banco.interes()
-    method maxPermitido() = banco.maxPermitido()
-
-}
-
-// PERSONAS
-
-
-object mes
-{
-
-    // numero actual de mes
-    var nroMes = 0
-
-    method nroMes() = nroMes
-
-    // PUNTO 3
-    method pasarMes()
-    {
-
-        // aumenta el numero del mes y asigna los sueldos por persona
-        nroMes += 1
-        poblacion.pagarCuentas()
-
-    }
-
-}
-
-class Deuda
-{
-
-
-    var meses = [] // conjunto de numeros desde el nroMes que empieza la deuda hasta donde termina
-    var pagoPorMes //es el precio del objeto por el interes divido la cantidad de meses
-    var saldada = false
-
-    method pagarDeuda()
-    {
-
-
-            // saco el primer elemento (no recuerdo si tiene efecto de lado)
-            meses.drop(meses.length()-1)
-
-            if(meses==0)
-            {
-
-              saldada = true
-
-            }
-
-    
-    }
-
-    
-
-    // el total de los montos vencidos es la cantidad de meses vencidos por el monto por mes
-    method montosVencidos() = meses.filter{ nroMes => nroMes < mes.nroMes() }*pagoPorMes
-
-}
-
-class trabajo
-{
-
-    var sueldo 
-    method sueldo()=sueldo
 
 }
 
@@ -281,10 +182,100 @@ class PagadoresCompulsivos inherits Persona
 
 }
 
+// BANCO Y TARJETAS
+
+object bancoCentral
+{
+
+    // debería tirar un random mejor, pero representa la tasa de interes asignada a cada entidad bancaria
+    var interes = 3
+
+    method interes () = interes
+
+}
+
+class Banco
+{
+
+    var interes
+    var maxPermitido
+
+    method maxPermitido() = maxPermitido
+    method interes() = bancoCentral.interes()
+    
+}
+
+//  TARJETAS
+
+class tarjeta
+{
+
+    var banco
+
+    var cantMeses
+
+    method cantMeses() = cantMeses
+    method interes() = banco.interes()
+    method maxPermitido() = banco.maxPermitido()
+
+}
+
+class Deuda
+{
 
 
+    var meses = [] // conjunto de numeros desde el nroMes que empieza la deuda hasta donde termina
+    var pagoPorMes //es el precio del objeto por el interes divido la cantidad de meses
+    var saldada = false
 
-// COMPRAR
+    method pagarDeuda()
+    {
+
+
+            // saco el primer elemento (no recuerdo si tiene efecto de lado)
+            meses.drop(meses.length()-1)
+
+            if(meses==0)
+            {
+
+              saldada = true
+
+            }
+
+    
+    }
+
+    
+
+    // el total de los montos vencidos es la cantidad de meses vencidos por el monto por mes
+    method montosVencidos() = meses.filter{ nroMes => nroMes < mes.nroMes() }*pagoPorMes
+
+}
+
+// MES
+
+
+object mes
+{
+
+    // numero actual de mes
+    var nroMes = 0
+
+    method nroMes() = nroMes
+
+    // PUNTO 3
+    method pasarMes()
+    {
+
+        // aumenta el numero del mes y asigna los sueldos por persona
+        nroMes += 1
+        poblacion.pagarCuentas()
+
+    }
+
+}
+
+// METODOS
 
 class Metodo 
 {
@@ -354,7 +345,7 @@ class ServicioDeProgramacion inherits Metodo
     var horasDeTrabajo
     var precioPorHora = 1000 
 
-    method puedeComprar(objeto)= horasDeTrabajo*PrecioPorHora > objeto.precio()
+    method puedeComprar(objeto)= horasDeTrabajo*precioPorHora > objeto.precio()
 
     // metodo cobrar no modifica nada ya que el pago es con trabajo humano
     override method cobrar(persona,precio){}
@@ -363,9 +354,7 @@ class ServicioDeProgramacion inherits Metodo
 
 
 
-
-// persona.comprar(objeto)
-
+// Objeto y Trabajo
 class Objeto {
 
 
@@ -374,5 +363,14 @@ class Objeto {
     method precio() = precio
   
 }
+
+class trabajo
+{
+
+    var sueldo 
+    method sueldo()=sueldo
+
+}
+
 
 
